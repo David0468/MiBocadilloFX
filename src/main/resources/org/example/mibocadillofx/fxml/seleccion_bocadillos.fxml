@@ -1,41 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="400" prefWidth="600" spacing="20" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
-
+<VBox alignment="CENTER" prefHeight="400" prefWidth="600" spacing="20" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.mibocadillofx.controller.SeleccionBocadillosController">
     <!-- Título -->
     <Text style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: darkgreen;" text="MI BOCATA" />
-
     <!-- Subtítulo -->
     <Text style="-fx-font-size: 16; -fx-fill: gray;" text="Selecciona tu bocadillo del día" />
-
     <!-- Contenedor de bocadillos -->
     <HBox alignment="CENTER" spacing="40">
-
         <!-- Bocadillo Frío -->
         <VBox alignment="CENTER" prefHeight="150" prefWidth="200" spacing="10" style="-fx-background-color: #40a0e4; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian, gray, 10, 0.5, 0, 0);">
             <Text style="-fx-font-size: 18; -fx-font-weight: bold; -fx-fill: white;" text="BOCADILLO FRÍO" />
-            <Text style="-fx-font-size: 14; -fx-fill: white;" text="Bocadillo" />
-            <Text style="-fx-font-size: 12; -fx-fill: white;" text="Ingredientes" />
-            <Text style="-fx-font-size: 12; -fx-fill: white;" text="Alérgenos" />
+            <Text fx:id="bocadilloFrioName" style="-fx-font-size: 14; -fx-fill: white;" text="Bocadillo" />
+            <Text fx:id="bocadilloFrioIngredients" style="-fx-font-size: 12; -fx-fill: white;" text="Ingredientes" />
+            <Text fx:id="bocadilloFrioAllergens" style="-fx-font-size: 12; -fx-fill: white;" text="Alérgenos" />
             <Button fx:id="btnBocadilloFrio" style="-fx-background-color: white; -fx-text-fill: #40a0e4;" text="Seleccionar" />
         </VBox>
-
         <!-- Bocadillo Caliente -->
         <VBox alignment="CENTER" prefHeight="150" prefWidth="200" spacing="10" style="-fx-background-color: #DC3545; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian, gray, 10, 0.5, 0, 0);">
             <Text style="-fx-font-size: 18; -fx-font-weight: bold; -fx-fill: white;" text="BOCADILLO CALIENTE" />
-            <Text style="-fx-font-size: 14; -fx-fill: white;" text="Bocadillo" />
-            <Text style="-fx-font-size: 12; -fx-fill: white;" text="Ingredientes" />
-            <Text style="-fx-font-size: 12; -fx-fill: white;" text="Alérgenos" />
+            <Text fx:id="bocadilloCalienteName" style="-fx-font-size: 14; -fx-fill: white;" text="Bocadillo" />
+            <Text fx:id="bocadilloCalienteIngredients" style="-fx-font-size: 12; -fx-fill: white;" text="Ingredientes" />
+            <Text fx:id="bocadilloCalienteAllergens" style="-fx-font-size: 12; -fx-fill: white;" text="Alérgenos" />
             <Button fx:id="btnBocadilloCaliente" style="-fx-background-color: white; -fx-text-fill: #DC3545;" text="Seleccionar" />
         </VBox>
-
     </HBox>
-
     <!-- Botón Cancelar Pedido -->
     <Button fx:id="btnCancelar" style="-fx-background-color: #C82333; -fx-text-fill: white; -fx-font-size: 14;" text="Cancelar Pedido" />
+
+    <!-- Botón Cerrar Sesión -->
+    <Button fx:id="btnCerrarSesion" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-size: 14;" text="Cerrar Sesión" />
 
 </VBox>
