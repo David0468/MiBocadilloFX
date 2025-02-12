@@ -4,23 +4,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="419.0" prefWidth="573.0" styleClass="vbox" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="org.example.mibocadillofx.controller.LoginController"
+      alignment="CENTER" prefHeight="419.0" prefWidth="573.0" styleClass="vbox"
+      xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
     <VBox alignment="CENTER" maxWidth="400" spacing="20" styleClass="vbox">
         <!-- Título -->
         <Text style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: darkgreen;" text="MI BOCATA" />
-
         <!-- Formulario -->
         <GridPane alignment="CENTER" hgap="10" vgap="10">
             <!-- Etiqueta y campo de correo -->
             <Label text="Correo Electrónico:" />
             <TextField fx:id="emailField" GridPane.columnIndex="1" />
-
             <!-- Etiqueta y campo de contraseña -->
             <Label text="Contraseña:" GridPane.rowIndex="1" />
             <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
             <!-- Botón de inicio de sesión -->
-            <Button fx:id="loginButton" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-size: 14;" text="Iniciar Sesión" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button fx:id="loginButton" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-size: 14;"
+                    text="Iniciar Sesión" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <columnConstraints>
                 <ColumnConstraints />
                 <ColumnConstraints />

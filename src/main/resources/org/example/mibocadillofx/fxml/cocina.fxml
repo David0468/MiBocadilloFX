@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="649.0" prefWidth="679.0" spacing="15" style="-fx-padding: 20; -fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+
+    <!-- Título -->
+    <Text style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: black;" text="GESTIÓN DE PEDIDOS - COCINA" />
+
+    <!-- Contadores -->
+    <HBox spacing="30">
+        <Label fx:id="lblTotalPedidos" style="-fx-font-size: 14; -fx-font-weight: bold;" text="Total Pedidos: 0" />
+        <Label fx:id="lblPendientes" style="-fx-font-size: 14; -fx-text-fill: red; -fx-font-weight: bold;" text="Pendientes: 0" />
+        <Label fx:id="lblEntregados" style="-fx-font-size: 14; -fx-text-fill: green; -fx-font-weight: bold;" text="Entregados: 0" />
+    </HBox>
+
+    <!-- Filtro por curso -->
+    <HBox spacing="10">
+        <Label style="-fx-font-size: 14;" text="Filtrar por curso:" />
+        <ComboBox fx:id="cmbCursos" promptText="Todos los cursos" />
+    </HBox>
+
+    <!-- Tabla Pedidos sin entregar -->
+    <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Pedidos sin entregar" />
+    <TableView fx:id="tablaPendientes" prefHeight="200">
+        <columns>
+            <TableColumn prefWidth="150" text="Alumno" />
+            <TableColumn prefWidth="150" text="Pedido" />
+            <TableColumn prefWidth="100" text="Curso" />
+            <TableColumn prefWidth="100" text="Entregar" />
+        </columns>
+    </TableView>
+
+    <!-- Tabla Pedidos entregados -->
+    <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Pedidos entregados" />
+    <TableView fx:id="tablaEntregados" prefHeight="200">
+        <columns>
+            <TableColumn prefWidth="150" text="Alumno" />
+            <TableColumn prefWidth="150" text="Pedido" />
+            <TableColumn prefWidth="100" text="Curso" />
+            <TableColumn prefWidth="100" text="Desmarcar" />
+        </columns>
+    </TableView>
+
+</VBox>

@@ -5,14 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class HelloApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+    public void start(Stage stage) throws Exception {
+        // Se carga el FXML de login desde el directorio de recursos
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/mibocadillofx/fxml/login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        // Cargar el archivo CSS
+        scene.getStylesheets().add(getClass().getResource("css/login.css").toExternalForm());
+        stage.setTitle("Mi Bocata - Login");
         stage.setScene(scene);
         stage.show();
     }
