@@ -4,16 +4,30 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="649.0" prefWidth="679.0" spacing="15" style="-fx-padding: 20; -fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #F2F2F2; -fx-padding: 20; -fx-spacing: 20;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
 
-    <!-- Título -->
-    <Text style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: black;" text="GESTIÓN DE PEDIDOS - COCINA" />
+    <!-- Encabezado -->
+    <VBox style="-fx-background-color: #333; -fx-padding: 10; -fx-alignment: center;">
+        <Text style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: white;" text="Pedidos del Día" />
+        <Button style="-fx-background-color: white; -fx-border-radius: 5; -fx-margin-top: 10;" text="Cerrar sesión" />
+    </VBox>
 
-    <!-- Contadores -->
-    <HBox spacing="30">
-        <Label fx:id="lblTotalPedidos" style="-fx-font-size: 14; -fx-font-weight: bold;" text="Total Pedidos: 0" />
-        <Label fx:id="lblPendientes" style="-fx-font-size: 14; -fx-text-fill: red; -fx-font-weight: bold;" text="Pendientes: 0" />
-        <Label fx:id="lblEntregados" style="-fx-font-size: 14; -fx-text-fill: green; -fx-font-weight: bold;" text="Entregados: 0" />
+    <!-- Contenedores de Bocadillos -->
+    <HBox alignment="CENTER" spacing="50" style="-fx-padding: 20 0 20 0;">
+        <VBox style="-fx-background-color: #40a0e4; -fx-padding: 20; -fx-border-radius: 10; -fx-spacing: 10; -fx-pref-width: 300; -fx-alignment: center;">
+            <Text style="-fx-font-size: 18; -fx-font-weight: bold; -fx-fill: white;" text="BOCADILLO FRÍO" />
+            <Text style="-fx-font-size: 14; -fx-fill: white;" text="Bocadillo" />
+            <Label fx:id="lblTotalFrio" style="-fx-text-fill: white;" text="Total pedidos: 0" />
+            <Label fx:id="lblPendientesFrio" style="-fx-text-fill: white;" text="Pendientes de entregar: 0" />
+            <Label fx:id="lblEntregadosFrio" style="-fx-text-fill: white;" text="Entregados: 0" />
+        </VBox>
+        <VBox style="-fx-background-color: #DC3545; -fx-padding: 20; -fx-border-radius: 10; -fx-spacing: 10; -fx-pref-width: 300; -fx-alignment: center;">
+            <Text style="-fx-font-size: 18; -fx-font-weight: bold; -fx-fill: white;" text="BOCADILLO CALIENTE" />
+            <Text style="-fx-font-size: 14; -fx-fill: white;" text="Bocadillo" />
+            <Label fx:id="lblTotalCaliente" style="-fx-text-fill: white;" text="Total pedidos: 0" />
+            <Label fx:id="lblPendientesCaliente" style="-fx-text-fill: white;" text="Pendientes de entregar: 0" />
+            <Label fx:id="lblEntregadosCaliente" style="-fx-text-fill: white;" text="Entregados: 0" />
+        </VBox>
     </HBox>
 
     <!-- Filtro por curso -->
@@ -26,10 +40,10 @@
     <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Pedidos sin entregar" />
     <TableView fx:id="tablaPendientes" prefHeight="200">
         <columns>
-            <TableColumn prefWidth="150" text="Alumno" />
-            <TableColumn prefWidth="150" text="Pedido" />
+            <TableColumn prefWidth="150" text="Nombre" />
+            <TableColumn prefWidth="150" text="Bocadillo" />
             <TableColumn prefWidth="100" text="Curso" />
-            <TableColumn prefWidth="100" text="Entregar" />
+            <TableColumn prefWidth="100" text="Entregado" />
         </columns>
     </TableView>
 
@@ -37,11 +51,10 @@
     <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Pedidos entregados" />
     <TableView fx:id="tablaEntregados" prefHeight="200">
         <columns>
-            <TableColumn prefWidth="150" text="Alumno" />
-            <TableColumn prefWidth="150" text="Pedido" />
+            <TableColumn prefWidth="150" text="Nombre" />
+            <TableColumn prefWidth="150" text="Bocadillo" />
             <TableColumn prefWidth="100" text="Curso" />
-            <TableColumn prefWidth="100" text="Desmarcar" />
+            <TableColumn prefWidth="100" text="Entregado" />
         </columns>
     </TableView>
-
 </VBox>

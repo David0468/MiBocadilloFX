@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.mibocadillofx.model.Bocadillo;
+import org.example.mibocadillofx.model.Pedido;
 import org.example.mibocadillofx.service.BocadilloService;
 import org.example.mibocadillofx.service.PedidoService;
 
@@ -39,12 +40,12 @@ public class SeleccionBocadillosController {
     @FXML
     private Button btnCancelar;
     @FXML
-    private Button btnCerrarSesion; // Botón para cerrar sesión
+    private Button btnCerrarSesion;
 
     private BocadilloService bocadilloService;
     private PedidoService pedidoService;
 
-    // Identificador del alumno (debe ser el nombre, ya que es la clave primaria en la tabla 'alumnos')
+    // Identificador del alumno (clave primaria de la tabla 'alumnos', es decir, el nombre)
     private String currentAlumnoId;
 
     @FXML
@@ -52,7 +53,7 @@ public class SeleccionBocadillosController {
         bocadilloService = new BocadilloService();
         pedidoService = new PedidoService();
 
-        // En producción, currentAlumnoId se pasará desde el LoginController.
+        // En producción, currentAlumnoId se establecerá desde el LoginController.
         if (currentAlumnoId == null) {
             currentAlumnoId = "Juan Perez"; // Valor de prueba
         }
@@ -64,7 +65,7 @@ public class SeleccionBocadillosController {
         btnCancelar.setOnAction(e -> handleCancelPedido());
         btnCerrarSesion.setOnAction(e -> handleCerrarSesion());
 
-        // Actualización en tiempo real (opcional): refrescar cada 60 segundos
+        // Actualización en tiempo real: refrescar cada 60 segundos
         Timeline refresco = new Timeline(new KeyFrame(Duration.seconds(60), event -> loadBocadillosDelDia()));
         refresco.setCycleCount(Timeline.INDEFINITE);
         refresco.play();
@@ -79,23 +80,39 @@ public class SeleccionBocadillosController {
         Bocadillo frio = bocadilloService.getBocadilloDelDia("frio");
         if (frio != null) {
             bocadilloFrioName.setText(frio.getNombre());
-            bocadilloFrioIngredients.setText(frio.getIngredientes());
-            bocadilloFrioAllergens.setText(frio.getAlergenos());
+            bocadilloFrioIngredients.setText("Ingredientes: " + frio.getIngredientes());
+            bocadilloFrioAllergens.setText("Alérgenos: " + frio.getAlergenos());
+            bocadilloFrioName.setStyle("-fx-fill: white;"); // Resetear a color predeterminado
         } else {
             bocadilloFrioName.setText("No hay bocadillo");
             bocadilloFrioIngredients.setText("");
             bocadilloFrioAllergens.setText("");
+            bocadilloFrioName.setStyle("-fx-fill: white;");
         }
 
         Bocadillo caliente = bocadilloService.getBocadilloDelDia("caliente");
         if (caliente != null) {
             bocadilloCalienteName.setText(caliente.getNombre());
-            bocadilloCalienteIngredients.setText(caliente.getIngredientes());
-            bocadilloCalienteAllergens.setText(caliente.getAlergenos());
+            bocadilloCalienteIngredients.setText("Ingredientes: " + caliente.getIngredientes());
+            bocadilloCalienteAllergens.setText("Alérgenos: " + caliente.getAlergenos());
+            bocadilloCalienteName.setStyle("-fx-fill: white;");
         } else {
             bocadilloCalienteName.setText("No hay bocadillo");
             bocadilloCalienteIngredients.setText("");
             bocadilloCalienteAllergens.setText("");
+            bocadilloCalienteName.setStyle("-fx-fill: white;");
+        }
+
+        // Verificar si el alumno ya tiene un pedido para el día y marcar el bocadillo seleccionado
+        Pedido currentPedido = pedidoService.getPedidoDelDia(currentAlumnoId);
+        if (currentPedido != null) {
+            String pedidoBocadillo = currentPedido.getIdBocadillo();
+            if (frio != null && pedidoBocadillo.equals(frio.getNombre())) {
+                bocadilloFrioName.setStyle("-fx-fill: #2d633b;");
+            }
+            if (caliente != null && pedidoBocadillo.equals(caliente.getNombre())) {
+                bocadilloCalienteName.setStyle("-fx-fill: #2d633b;");
+            }
         }
     }
 
@@ -108,6 +125,7 @@ public class SeleccionBocadillosController {
             } else {
                 System.out.println("Error al procesar el pedido.");
             }
+            loadBocadillosDelDia(); // Recargar para actualizar la indicación visual
         } else {
             System.out.println("No hay bocadillo disponible para el tipo " + tipo);
         }
@@ -120,6 +138,7 @@ public class SeleccionBocadillosController {
         } else {
             System.out.println("No se pudo cancelar el pedido.");
         }
+        loadBocadillosDelDia();
     }
 
     private void handleCerrarSesion() {
@@ -128,7 +147,6 @@ public class SeleccionBocadillosController {
             Parent root = loader.load();
             Stage stage = (Stage) btnCerrarSesion.getScene().getWindow();
             Scene scene = new Scene(root);
-            // Agrega la hoja de estilos manualmente:
             scene.getStylesheets().add(getClass().getResource("/org/example/mibocadillofx/css/login.css").toExternalForm());
             stage.setScene(scene);
             stage.setTitle("Mi Bocata - Login");
