@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class PedidoDAO {
 
@@ -87,6 +88,51 @@ public class PedidoDAO {
             return false;
         } finally {
             session.close();
+        }
+    }
+
+    public void marcarComoEntregado(Pedido pedido) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction tx = session.beginTransaction();
+            pedido.setFechaRecogida(LocalDate.now());
+            session.update(pedido);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void desmarcarComoEntregado(Pedido pedido) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction tx = session.beginTransaction();
+            pedido.setFechaRecogida(null);
+            session.update(pedido);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void actualizarPedido(Pedido pedido) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction tx = session.beginTransaction();
+            session.update(pedido);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Pedido> obtenerPedidosPorFecha(LocalDate fecha) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Pedido WHERE fechaPedido = :fecha", Pedido.class)
+                    .setParameter("fecha", fecha)
+                    .list();
+        }
+    }
+    public List<String> obtenerCursosDisponibles() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createNativeQuery("SELECT nombre FROM cursos WHERE fecha_baja IS NULL").list();
         }
     }
 }

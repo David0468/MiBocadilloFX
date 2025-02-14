@@ -13,6 +13,7 @@ import org.example.mibocadillofx.dao.AlumnoDAO;
 import org.example.mibocadillofx.model.Alumno;
 import org.example.mibocadillofx.model.Usuario;
 import org.example.mibocadillofx.service.LoginService;
+import org.example.mibocadillofx.util.SessionManager;
 
 import java.io.IOException;
 
@@ -42,36 +43,55 @@ public class LoginController {
         Usuario usuario = loginService.autenticar(email, password);
 
         if (usuario != null) {
+            SessionManager.iniciarSesion(usuario); // Guardar usuario en sesión
+
+            String fxmlPath;
+            String tituloVentana;
+
+            switch (usuario.getTipoUsuario()) {
+                case "alumno":
+                    fxmlPath = "/org/example/mibocadillofx/fxml/seleccion_bocadillos.fxml";
+                    tituloVentana = "Selección de Bocadillos";
+                    break;
+                case "cocina":
+                    fxmlPath = "/org/example/mibocadillofx/fxml/cocina.fxml";
+                    tituloVentana = "Cocina - Pedidos del Día";
+                    break;
+                case "admin":
+                    fxmlPath = "/org/example/mibocadillofx/fxml/admin.fxml"; // Asegúrate de que esta vista existe
+                    tituloVentana = "Administración - Gestión del Sistema";
+                    break;
+                default:
+                    showAlert("Error", "Tipo de usuario desconocido.");
+                    return;
+            }
+
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/mibocadillofx/fxml/seleccion_bocadillos.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
                 Parent root = loader.load();
 
-                // Obtén el controlador de la vista de selección
-                SeleccionBocadillosController seleccionController = loader.getController();
-
-                // Si el usuario es alumno, obten el nombre del alumno de la tabla 'alumnos'
+                // Si el usuario es un alumno, obtenemos su nombre desde la tabla alumnos
                 if ("alumno".equals(usuario.getTipoUsuario())) {
                     AlumnoDAO alumnoDAO = new AlumnoDAO();
                     Alumno alumno = alumnoDAO.getAlumnoByUserMail(usuario.getMail());
                     if (alumno != null) {
+                        SeleccionBocadillosController seleccionController = loader.getController();
                         seleccionController.setCurrentAlumnoId(alumno.getNombre());
                     } else {
                         showAlert("Error", "No se encontró el registro del alumno.");
                         return;
                     }
-                } else {
-                    // Para otros tipos (por ejemplo, cocina o admin), puedes pasar otro identificador o manejarlo de otra forma.
-                    seleccionController.setCurrentAlumnoId(usuario.getMail());
                 }
 
+                // Cambiar de escena
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Selección de Bocadillos - " + usuario.getTipoUsuario().toUpperCase());
+                stage.setTitle(tituloVentana);
                 stage.show();
             } catch (IOException ex) {
                 ex.printStackTrace();
-                showAlert("Error", "No se pudo cargar la vista de selección.");
+                showAlert("Error", "No se pudo cargar la vista correspondiente.");
             }
         } else {
             showAlert("Error de autenticación", "Correo o contraseña incorrectos.");

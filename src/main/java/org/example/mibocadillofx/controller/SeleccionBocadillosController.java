@@ -14,6 +14,7 @@ import org.example.mibocadillofx.model.Bocadillo;
 import org.example.mibocadillofx.model.Pedido;
 import org.example.mibocadillofx.service.BocadilloService;
 import org.example.mibocadillofx.service.PedidoService;
+import org.example.mibocadillofx.util.SessionManager;
 
 import java.io.IOException;
 
@@ -63,7 +64,7 @@ public class SeleccionBocadillosController {
         btnBocadilloFrio.setOnAction(e -> handleSelectBocadillo("frio"));
         btnBocadilloCaliente.setOnAction(e -> handleSelectBocadillo("caliente"));
         btnCancelar.setOnAction(e -> handleCancelPedido());
-        btnCerrarSesion.setOnAction(e -> handleCerrarSesion());
+        btnCerrarSesion.setOnAction(e -> cerrarSesion());
 
         // Actualización en tiempo real: refrescar cada 60 segundos
         Timeline refresco = new Timeline(new KeyFrame(Duration.seconds(60), event -> loadBocadillosDelDia()));
@@ -141,7 +142,13 @@ public class SeleccionBocadillosController {
         loadBocadillosDelDia();
     }
 
-    private void handleCerrarSesion() {
+    private void cerrarSesion() {
+        System.out.println("Usuario antes de cerrar sesión: " + SessionManager.getUsuarioActual());
+
+        SessionManager.cerrarSesion(); // Elimina los datos de sesión
+
+        System.out.println("Usuario después de cerrar sesión: " + SessionManager.getUsuarioActual());
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/mibocadillofx/fxml/login.fxml"));
             Parent root = loader.load();

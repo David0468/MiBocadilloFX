@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<VBox prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #F2F2F2; -fx-padding: 20; -fx-spacing: 20;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #F2F2F2; -fx-padding: 20; -fx-spacing: 20;"
+      xmlns="http://javafx.com/javafx/11.0.14-internal"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.mibocadillofx.controller.CocinaController">
 
     <!-- Encabezado -->
     <VBox style="-fx-background-color: #333; -fx-padding: 10; -fx-alignment: center;">
         <Text style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: white;" text="Pedidos del Día" />
-        <Button style="-fx-background-color: white; -fx-border-radius: 5; -fx-margin-top: 10;" text="Cerrar sesión" />
+        <!-- Botón de cerrar sesión con fx:id -->
+        <Button fx:id="btnCerrarSesion" style="-fx-background-color: white; -fx-border-radius: 5; -fx-margin-top: 10;" text="Cerrar sesión" />
     </VBox>
 
     <!-- Contenedores de Bocadillos -->
@@ -40,10 +49,10 @@
     <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Pedidos sin entregar" />
     <TableView fx:id="tablaPendientes" prefHeight="200">
         <columns>
-            <TableColumn prefWidth="150" text="Nombre" />
-            <TableColumn prefWidth="150" text="Bocadillo" />
-            <TableColumn prefWidth="100" text="Curso" />
-            <TableColumn prefWidth="100" text="Entregado" />
+            <TableColumn fx:id="colNombrePendiente" prefWidth="150" text="Nombre" />
+            <TableColumn fx:id="colBocadilloPendiente" prefWidth="150" text="Bocadillo" />
+            <TableColumn fx:id="colCursoPendiente" prefWidth="100" text="Curso" />
+            <TableColumn fx:id="colAccionPendiente" prefWidth="100" text="Entregado" />
         </columns>
     </TableView>
 
@@ -51,10 +60,10 @@
     <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Pedidos entregados" />
     <TableView fx:id="tablaEntregados" prefHeight="200">
         <columns>
-            <TableColumn prefWidth="150" text="Nombre" />
-            <TableColumn prefWidth="150" text="Bocadillo" />
-            <TableColumn prefWidth="100" text="Curso" />
-            <TableColumn prefWidth="100" text="Entregado" />
+            <TableColumn fx:id="colNombreEntregado" prefWidth="150" text="Nombre" />
+            <TableColumn fx:id="colBocadilloEntregado" prefWidth="150" text="Bocadillo" />
+            <TableColumn fx:id="colCursoEntregado" prefWidth="100" text="Curso" />
+            <TableColumn fx:id="colAccionEntregado" prefWidth="100" text="Entregado" />
         </columns>
     </TableView>
 </VBox>

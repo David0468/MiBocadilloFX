@@ -19,6 +19,9 @@ public class Alumno {
     @Column(name = "id_usuario")
     private String idUsuario; // Este es el correo del alumno
 
+    @Column(name = "id_curso") // Asegura que este campo esté bien mapeado
+    private String idCurso;
+
     // Puedes incluir más campos según sea necesario (fecha_baja, id_curso, etc.)
 
     // Constructor sin argumentos (requerido por Hibernate)
@@ -45,5 +48,13 @@ public class Alumno {
     }
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public String getIdCurso() {
+        return idCurso;
+    }
+
+    public void setIdCurso(String idCurso) {
+        this.idCurso = idCurso;
     }
 }
