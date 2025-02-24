@@ -75,7 +75,10 @@ public class SeleccionBocadillosController {
     // Setter para recibir el identificador del alumno desde el LoginController
     public void setCurrentAlumnoId(String alumnoId) {
         this.currentAlumnoId = alumnoId;
+        limpiarSeleccion(); // Limpiar visualmente al iniciar sesión
+        loadBocadillosDelDia(); // Cargar datos nuevos del nuevo alumno
     }
+
 
     private void loadBocadillosDelDia() {
         Bocadillo frio = bocadilloService.getBocadilloDelDia("frio");
@@ -142,12 +145,16 @@ public class SeleccionBocadillosController {
         loadBocadillosDelDia();
     }
 
+    public void limpiarSeleccion() {
+        // Limpiar el texto y los estilos visuales
+        bocadilloFrioName.setStyle("-fx-fill: white;");
+        bocadilloCalienteName.setStyle("-fx-fill: white;");
+    }
+
     private void cerrarSesion() {
-        System.out.println("Usuario antes de cerrar sesión: " + SessionManager.getUsuarioActual());
+        limpiarSeleccion(); // Limpia la selección visual
 
-        SessionManager.cerrarSesion(); // Elimina los datos de sesión
-
-        System.out.println("Usuario después de cerrar sesión: " + SessionManager.getUsuarioActual());
+        SessionManager.cerrarSesion(); // Limpiar usuario actual
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/mibocadillofx/fxml/login.fxml"));
