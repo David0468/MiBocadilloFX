@@ -15,11 +15,28 @@ public class Bocadillo {
     private String tipo_bocadillo;  // "frio" o "caliente"
     private String dia;             // Por ejemplo, "martes", "miércoles", etc.
 
+    private String fecha_baja;
+
     // Campo transitorio para los alérgenos (no se persiste en BD)
     private transient String alergenos;
 
     // Constructor sin argumentos (requerido por Hibernate)
     public Bocadillo() {
+    }
+
+    public Bocadillo(String nombre, String ingredientes, double precio, String tipo_bocadillo, String dia, String fecha_baja) {
+        this.nombre = nombre;
+        this.ingredientes = ingredientes;
+        this.precio = precio;
+        this.tipo_bocadillo = tipo_bocadillo;
+        this.dia = dia;
+        this.fecha_baja = fecha_baja;
+    }
+
+    public Bocadillo(String nombre, String tipo_bocadillo, String dia) {
+        this.nombre = nombre;
+        this.tipo_bocadillo = tipo_bocadillo;
+        this.dia = dia;
     }
 
     // Getters y setters
@@ -58,5 +75,17 @@ public class Bocadillo {
     }
     public void setAlergenos(String alergenos) {
         this.alergenos = alergenos;
+    }
+
+    public String getFecha_baja() {
+        return fecha_baja;
+    }
+
+    public void setFecha_baja(String fecha_baja) {
+        this.fecha_baja = fecha_baja;
+    }
+
+    public boolean isActivo() {
+        return fecha_baja == null; // Si fecha_baja es NULL, el bocadillo está activo
     }
 }

@@ -23,10 +23,15 @@ public class Usuario {
     private String tipoUsuario;
 
     // Constructor sin argumentos (requerido por Hibernate)
-    public Usuario() {
-    }
+    public Usuario() {}
 
     // Constructor completo (opcional)
+    public Usuario(String mail, String contrasena, String tipoUsuario) {
+        this.mail = mail;
+        this.contrasena = contrasena;
+        this.tipoUsuario = tipoUsuario;
+    }
+
     public Usuario(String mail, String mac, String contrasena, String tipoUsuario) {
         this.mail = mail;
         this.mac = mac;

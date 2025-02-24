@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.mibocadillofx.controller.AdminController">
+
+    <!-- Encabezado -->
+    <top>
+        <HBox spacing="10" style="-fx-background-color: #333; -fx-padding: 15; -fx-alignment: center-right;">
+            <Text style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: white;" text="Panel de Administración" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnCerrarSesion" text="Cerrar sesión" style="-fx-background-color: #ff4d4d; -fx-text-fill: white; -fx-padding: 8 15;" />
+        </HBox>
+    </top>
+
+    <!-- Cuerpo con pestañas -->
+    <center>
+        <TabPane fx:id="tabPane">
+
+            <!-- Dashboard -->
+            <Tab text="Inicio">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Resumen General" />
+                    <HBox spacing="20">
+                        <VBox style="-fx-background-color: #40a0e4; -fx-padding: 15; -fx-border-radius: 10;">
+                            <Text style="-fx-fill: white;" text="Pedidos Totales" />
+                            <Label fx:id="lblPedidosTotales" text="0" />
+                        </VBox>
+                        <VBox style="-fx-background-color: #28a745; -fx-padding: 15; -fx-border-radius: 10;">
+                            <Text style="-fx-fill: white;" text="Ingresos Totales" />
+                            <Label fx:id="lblIngresosTotales" text="0.00 €" />
+                        </VBox>
+                        <VBox style="-fx-background-color: #ffc107; -fx-padding: 15; -fx-border-radius: 10;">
+                            <Text style="-fx-fill: white;" text="Pedidos Pendientes" />
+                            <Label fx:id="lblPedidosPendientes" text="0" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <!-- Gestión de Usuarios -->
+            <Tab text="Usuarios">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Gestión de Usuarios" />
+                    <HBox spacing="10">
+                        <Button fx:id="btnAgregarUsuario" text="Añadir Usuario" />
+                        <Button fx:id="btnEditarUsuario" text="Editar Usuario" />
+                        <Button fx:id="btnEliminarUsuario" text="Eliminar Usuario" />
+                    </HBox>
+                    <TableView fx:id="tablaUsuarios">
+                        <columns>
+                            <TableColumn fx:id="colCorreoUsuario" text="Correo" prefWidth="200" />
+                            <TableColumn fx:id="colContrasenaUsuario" text="Contraseña" prefWidth="150" />
+                            <TableColumn fx:id="colTipoUsuario" text="Rol" prefWidth="120" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- Gestión de Pedidos -->
+            <Tab text="Pedidos">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Gestión de Pedidos" />
+                    <HBox spacing="10">
+                        <Label text="Filtrar por fecha:" />
+                        <DatePicker fx:id="dpFiltroFecha" />
+                        <Label text="Filtrar por usuario:" />
+                        <TextField fx:id="txtFiltroUsuario" promptText="Correo del usuario" />
+                        <Button fx:id="btnFiltrarPedidos" text="Filtrar" />
+                    </HBox>
+                    <TableView fx:id="tablaPedidos">
+                        <columns>
+                            <TableColumn fx:id="colFechaPedido" text="Fecha" prefWidth="120" />
+                            <TableColumn fx:id="colUsuarioPedido" text="Usuario" prefWidth="200" />
+                            <TableColumn fx:id="colBocadilloPedido" text="Bocadillo" prefWidth="200" />
+                            <TableColumn fx:id="colEstadoPedido" text="Estado" prefWidth="120" />
+                            <TableColumn fx:id="colAccionPedido" text="Acciones" prefWidth="150" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- Gestión de Bocadillos -->
+            <Tab text="Bocadillos">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Gestión de Bocadillos" />
+                    <HBox spacing="10">
+                        <Button fx:id="btnAgregarBocadillo" text="Añadir Bocadillo" />
+                        <Button fx:id="btnEditarBocadillo" text="Editar Bocadillo" />
+                        <Button fx:id="btnCambiarEstadoBocadillo" text="Activar/Desactivar Bocadillo" />
+                        <Button fx:id="btnEliminarBocadillo" text="Eliminar Bocadillo" />
+                    </HBox>
+                    <TableView fx:id="tablaBocadillos">
+                        <columns>
+                            <TableColumn fx:id="colNombreBocadillo" text="Nombre" prefWidth="200" />
+                            <TableColumn fx:id="colIngredientesBocadillo" text="Ingredientes" prefWidth="300" />
+                            <TableColumn fx:id="colTipoBocadillo" text="Tipo" prefWidth="120" />
+                            <TableColumn fx:id="colPrecioBocadillo" text="Precio (€)" prefWidth="100" />
+                            <TableColumn fx:id="colDiaBocadillo" text="Día Disponible" prefWidth="150" />
+                            <TableColumn fx:id="colEstadoBocadillo" text="Estado" prefWidth="120" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+
+            <!-- Configuración -->
+            <Tab text="Configuración">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Configuraciones Generales" />
+                    <HBox spacing="10">
+                        <Label text="Descuento global (%):" />
+                        <TextField fx:id="txtDescuentoGlobal" promptText="Ejemplo: 10" />
+                        <Button fx:id="btnGuardarConfiguracion" text="Guardar" />
+                    </HBox>
+                    <HBox spacing="10">
+                        <Label text="Límite de pedidos por alumno:" />
+                        <TextField fx:id="txtLimitePedidos" promptText="Ejemplo: 2" />
+                    </HBox>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>
